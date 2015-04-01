@@ -40,16 +40,9 @@ Download https://github.com/RolfHut/noCodeIoT/blob/master/firmware/publishAnalog
 spark compile app.ino --saveTo firmware.bin
 
 Connect a Photon and put it in DFU mode by holding the mode button continously while pressing the reset button. Let go of the mode button as soon as the Photon starts flashing yellow.
-Flash one of the two .ino files by running, from the directory where you saved the files: 
-<code>spark flash --usb publishAnalogRead.bin</code>
-or
-```spark flash --usb publishTimeInterval.bin'''
+Flash one of the two .ino files by running, from the directory where you saved the files: <code>spark flash --usb publishAnalogRead.bin</code> or <code>spark flash --usb publishTimeInterval.bin</code>.
 
-After flashing, the Photon should be breathing cyan, or blinking green. press and hold the mode button untill it blinks blue. This means it is in "listening mode". now run
-spark identify
-Copy paste the unique ID to an excel file. run
-spark setup wifi
-and follow the instructions. Make sure you profide it with the WiFi credentials of the network that the students will be using. You are asked to 
+After flashing, the Photon should be breathing cyan, or blinking green. press and hold the mode button untill it blinks blue. This means it is in "listening mode". now run <code>spark identify</code>. Copy paste the unique ID to an excel file. Run <code>spark setup wifi</code> and follow the instructions. Make sure you profide it with the WiFi credentials of the network that the students will be using. You are asked to 
 where NAME is a name that you make up. Copy the name of the Photon in the column next to the just copied ID in your excel file, and write it on the box of the Photon with a sharpie.
 
 
