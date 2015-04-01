@@ -41,7 +41,7 @@ spark compile app.ino --saveTo firmware.bin
 
 Connect a Photon and put it in DFU mode by holding the mode button continously while pressing the reset button. Let go of the mode button as soon as the Photon starts flashing yellow.
 Flash one of the two .ino files by running, from the directory where you saved the files: 
-```spark flash --usb publishAnalogRead.bin'''
+<code>spark flash --usb publishAnalogRead.bin</code>
 or
 ```spark flash --usb publishTimeInterval.bin'''
 
