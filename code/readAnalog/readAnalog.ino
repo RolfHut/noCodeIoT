@@ -1,8 +1,18 @@
-
-
+/* 
+script do to analog measurements. 
+- every second, a measurement (as floating point) is written over the Serial line
+- every 5 seconds, a measurement (as floating point) is published to the Cloud
+- the function "readAnalog" is call-able from the Cloud. A measurement (as integer!)
+  is returned. 
+*/
 
 //the interval used to measure, in milliseconds
 int measureTime = 1000;
+
+//the interval used to measure, in milliseconds
+int measureTimeOnline = 5000;
+//the name of the event.
+String eventName = "measurement/JuniorTUDelft/studentName";
 
 //the pin to use for measuring.
 String analogPin = "A0";
@@ -11,7 +21,8 @@ String analogPin = "A0";
 int measuredBitValue = 0;
 float measuredValue = 0.0;
 
-Timer measureTimer(measureTime, readAndSend);
+Timer measureTimer(measureTime, readAndSerial);
+Timer measureTimerOnline(measureTimeOnline, readAndPublish);
 
 void setup(){
   //start Serial communication
@@ -23,7 +34,8 @@ void setup(){
 
   //start timer that calls measurement en sends results over Serial
   measureTimer.start();
-
+  measureTimerOnline.start();
+  
   //make measuredValue available online
   Particle.variable("measurement",measuredValue);
 
@@ -33,9 +45,14 @@ void setup(){
 
 void loop(){}
 
-void readAndSend(){
+void readAndSerial(){
   readAnalogValue(analogPin);
   Serial.println(measuredValue);
+}
+
+void readAndPublish(){
+  readAnalogValue(analogPin);
+  Particle.publish(eventName, (String) measuredValue);
 }
 
 //readAnalog is done in two steps to allow calling readAnalogValue from the Cloud
